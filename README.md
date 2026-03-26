@@ -8,31 +8,25 @@ vaisseau_y = 60
 
 
 
-def deplacement() :
+def vaisseau_deplacement(x,y) :
     if pyxel.btn(pyxel.KEY_RIGHT):
-        if x < 120 :
+        if (x < 120) :
             x = x + 1
     if pyxel.btn(pyxel.KEY_LEFT):
-        if x > 0 :
+        if (x > 0) :
             x = x - 1
     if pyxel.btn(pyxel.KEY_UP):
-        if y < 120 :
+        if (y < 120) :
             y = y + 1
     if pyxel.btn(pyxel.KEY_DOWN):
-        if x < 0 :
+        if (x < 0) :
             y = y - 1
     return x,y
 
-
-
-
-    
-     
-
 def update():
-    # Quitter avec la touche Q
-    if pyxel.btqnp(pyxel.KEY_Q):
-        pyxel.quit()
+    global vaisseau_x,vaisseau_y
+    vaisseau_x, vaisseau_y = vaisseau_deplacement(vaisseau_x, vaisseau_y)
+    
 
 def draw():
     # Effacer l'écran avec la couleur 0 (noir)
@@ -42,4 +36,3 @@ def draw():
 
 # Lancement du jeu
 pyxel.run(update, draw)
-
