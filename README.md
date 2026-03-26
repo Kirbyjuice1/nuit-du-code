@@ -41,9 +41,12 @@ def tirs_deplacement(tirs_liste):
     return tirs_liste
 
 def update():
-    global vaisseau_x,vaisseau_y
-    global vaisseau_x, vaisseau_y, tirs_liste
+    global vaisseau_x,vaisseau_y, tirs_liste	
+    
     vaisseau_x, vaisseau_y = vaisseau_deplacement(vaisseau_x, vaisseau_y)
+    
+    tirs_liste = tirs_creation(vaisseau_x, vaisseau_y, tirs_liste)
+    
     tirs_liste = tirs_deplacement(tirs_liste)
 
 def draw():
