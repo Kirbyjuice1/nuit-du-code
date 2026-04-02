@@ -16,8 +16,8 @@ vaisseau_y2 = 60
 vies = 4
 
 # initialisation des tirs
-tirs_liste = []
-
+tirs_liste1 = []
+tirs_liste2 = []
 # initialisation des ennemis
 ennemis_liste = []
 
@@ -59,13 +59,21 @@ def vaisseau2_deplacement(x2, y2):
             y2 = y2 - 1
     return x2 , y2
 
-def tirs_creation(x, y, tirs_liste):
+def tirs_creation1(x1, y1, tirs_liste1):
     """création d'un tir avec la barre d'espace"""
 
     # btnr pour eviter les tirs multiples
     if pyxel.btnr(pyxel.KEY_SPACE):
-        tirs_liste.append([x+4, y-4])
-    return tirs_liste
+        tirs_liste1.append([x1+4, y1-4])
+    return tirs_liste1
+
+def tirs_creation2(x2, y2, tirs_liste2):
+    """création d'un tir avec la barre d'espace"""
+
+    # btnr pour eviter les tirs multiples
+    if pyxel.btnr(pyxel.KEY_E):
+        tirs_liste2.append([x2+4, y2-4])
+    return tirs_liste2
 
 
 def tirs_deplacement(tirs_liste):
@@ -119,7 +127,7 @@ def ennemis_suppression():
     """disparition d'un ennemi et d'un tir si contact"""
 
     for ennemi in ennemis_liste:
-        for tir in tirs_liste:
+        for tir in tirs_liste1:
             if ennemi[0] <= tir[0]+1 and ennemi[0]+8 >= tir[0] and ennemi[1]+8 >= tir[1]:
                 ennemis_liste.remove(ennemi)
                 tirs_liste.remove(tir)
@@ -145,17 +153,17 @@ def explosions_animation():
 def update():
     """mise à jour des variables (30 fois par seconde)"""
 
-    global vaisseau_x1, vaisseau_y1, vaisseau_x2, vaisseau_y2, tirs_liste, ennemis_liste, vies, explosions_liste
+    global vaisseau_x1, vaisseau_y1, vaisseau_x2, vaisseau_y2, tirs_liste1, tirs_liste2, ennemis_liste, vies, explosions_liste
 
     # mise à jour de la position du vaisseau
     vaisseau_x1, vaisseau_y1 = vaisseau1_deplacement(vaisseau_x1, vaisseau_y1)
     vaisseau_x2, vaisseau_y2 = vaisseau2_deplacement(vaisseau_x2, vaisseau_y2)
     # creation des tirs en fonction de la position du vaisseau
-    tirs_liste = tirs_creation(vaisseau_x1, vaisseau_y1, tirs_liste)
-    tirs_liste = tirs_creation(vaisseau_x2, vaisseau_y2, tirs_liste)
+    tirs_liste1 = tirs_creation1(vaisseau_x1, vaisseau_y1, tirs_liste1)
+    tirs_liste2 = tirs_creation2(vaisseau_x2, vaisseau_y2, tirs_liste2)
     # mise a jour des positions des tirs
-    tirs_liste = tirs_deplacement(tirs_liste)
-
+    tirs_liste1 = tirs_deplacement(tirs_liste1)
+    tirs_liste2 = tirs_deplacement(tirs_liste2)
     # creation des ennemis
     ennemis_liste = ennemis_creation(ennemis_liste)
 
@@ -191,10 +199,13 @@ def draw():
         pyxel.rect(vaisseau_x2, vaisseau_y2, 8, 8, 1)
 
         # tirs
-        for tir in tirs_liste:
+        for tir in tirs_liste1:
             pyxel.rect(tir[0], tir[1], 1, 4, 10)
 
+        for tir in tirs_liste2:
+            pyxel.rect(tir[0],tir[1], 1, 4, 10)
         # ennemis
+        
         for ennemi in ennemis_liste:
             pyxel.rect(ennemi[0], ennemi[1], 8, 8, 8)
 
