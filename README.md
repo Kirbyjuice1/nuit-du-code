@@ -12,7 +12,7 @@ vaisseau_y1 = 60
 
 vaisseau_x2 = 40
 vaisseau_y2 = 60
-# vies
+# vies 
 vies = 4
 
 # initialisation des tirs
@@ -21,7 +21,7 @@ tirs_liste2 = []
 # initialisation des ennemis
 ennemis_liste = []
 
-# initialisation des explosions
+# initialisation  des explosions
 explosions_liste = []  
 
 
@@ -130,10 +130,16 @@ def ennemis_suppression():
         for tir in tirs_liste1:
             if ennemi[0] <= tir[0]+1 and ennemi[0]+8 >= tir[0] and ennemi[1]+8 >= tir[1]:
                 ennemis_liste.remove(ennemi)
-                tirs_liste.remove(tir)
+                tirs_liste1.remove(tir)
                 # on ajoute l'explosion
                 explosions_creation(ennemi[0], ennemi[1])
-
+    for ennemi in ennemis_liste:
+            for tir in tirs_liste2:
+                if ennemi[0] <= tir[0]+1 and ennemi[0]+8 >= tir[0] and ennemi[1]+8 >= tir[1]:
+                    ennemis_liste.remove(ennemi)
+                    tirs_liste2.remove(tir)
+                    # on ajoute l'explosion
+                    explosions_creation(ennemi[0], ennemi[1])
 
 def explosions_creation(x, y):
     """explosions aux points de collision entre deux objets"""
